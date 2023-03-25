@@ -26,17 +26,18 @@ class CarParkApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         title: APP_NAME,
         theme: ThemeData(
-          primarySwatch: AppStyle.PRIMARY_SWATCH,
-          accentColor: AppStyle.ACCENT_COLOR,
           textTheme: TextTheme(
-            display1: AppStyle.D1_STYLE,
-            body1: AppStyle.B1_STYLE,
+            headlineMedium: AppStyle.D1_STYLE,
+            bodyLarge: AppStyle.B1_STYLE,
           ),
           buttonTheme: ButtonThemeData(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
           ),
+          colorScheme:
+              ColorScheme.fromSwatch(primarySwatch: AppStyle.PRIMARY_SWATCH)
+                  .copyWith(secondary: AppStyle.ACCENT_COLOR),
         ),
         localizationsDelegates: [
           AppLocalizationDelegate(),
@@ -48,13 +49,15 @@ class CarParkApp extends StatelessWidget {
           Locale('fr'),
           Locale('es'),
         ],
-        localeResolutionCallback: (Locale locale, Iterable<Locale> supportedLocales) {
+        localeResolutionCallback:
+            (Locale locale, Iterable<Locale> supportedLocales) {
           if (locale == null) {
             return supportedLocales.first;
           }
 
           for (Locale supportedLocale in supportedLocales) {
-            if (supportedLocale.languageCode == locale.languageCode || supportedLocale.countryCode == locale.countryCode) {
+            if (supportedLocale.languageCode == locale.languageCode ||
+                supportedLocale.countryCode == locale.countryCode) {
               return supportedLocale;
             }
           }
